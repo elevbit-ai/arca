@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 🔒 Relatar vulnerabilidade de segurança
+    url: https://github.com/elevbit-ai/arca/blob/main/SECURITY.md
+    about: Não abra issue pública para falhas de segurança — siga a Política de Segurança.
+  - name: 📖 Documentação e site
+    url: https://elevbit-ai.github.io/arca/
+    about: Guia completo, arquitetura e vídeo explicativo.

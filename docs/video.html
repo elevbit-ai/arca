@@ -4,7 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Arca em Movimento — Vídeo Explicativo</title>
-<meta name="description" content="Vídeo explicativo animado do Arca — cofre cifrado que clona o Android e recupera apps e WhatsApp. Autor: Joaquim Pedro de Morais Filho.">
+<meta name="description" content="Vídeo explicativo animado e narrado do Arca — cofre cifrado que clona o Android e recupera apps e WhatsApp. Autor: Joaquim Pedro de Morais Filho.">
+<meta name="author" content="Joaquim Pedro de Morais Filho">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230b0f17'/%3E%3Ctext x='50' y='72' font-size='64' text-anchor='middle' fill='%23e6a94e'%3E%E2%9B%A8%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
@@ -21,35 +23,47 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
 body{
-  background:var(--ground);color:var(--ink);font-family:var(--body);
+  background:radial-gradient(130% 100% at 50% 0%,#0f1520 0%,#070a10 100%);
+  color:var(--ink);font-family:var(--body);
   display:flex;align-items:center;justify-content:center;padding:clamp(8px,2vw,28px);
   -webkit-font-smoothing:antialiased;
 }
 .player{
-  width:min(100%,1000px);background:var(--steel);border:1px solid var(--line);
-  border-radius:16px;overflow:hidden;box-shadow:0 30px 80px -30px #000,0 0 0 1px #0006;
+  width:min(100%,1040px);background:var(--steel);border:1px solid var(--line);
+  border-radius:18px;overflow:hidden;box-shadow:0 40px 100px -40px #000,0 0 0 1px #0006;
   display:flex;flex-direction:column;
 }
 .bar{display:flex;align-items:center;justify-content:space-between;gap:12px;
-  padding:12px 18px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#18212f,#121a27)}
+  padding:13px 20px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#18212f,#121a27)}
 .brand{font-family:var(--disp);font-weight:700;font-size:18px;letter-spacing:.5px;display:flex;align-items:center;gap:9px}
 .brand .seal{color:var(--brass);font-size:20px;filter:drop-shadow(0 0 10px #e6a94e55)}
 .brand small{color:var(--faint);font-weight:500;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-left:4px}
 .scenelabel{font-family:var(--mono);font-size:12px;color:var(--mut);letter-spacing:.5px}
-.stage{position:relative;aspect-ratio:16/9;background:
-  radial-gradient(120% 90% at 50% 0%,#17202e 0%,#0c121c 55%,#080c13 100%);
-  overflow:hidden}
+
+.stage{position:relative;aspect-ratio:16/9;overflow:hidden;background:
+  radial-gradient(120% 90% at 50% 0%,#17202e 0%,#0c121c 55%,#080c13 100%)}
+/* subtle grid + vignette for depth */
+.stage::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background:
+    linear-gradient(#ffffff08 1px,transparent 1px) 0 0/100% 46px,
+    linear-gradient(90deg,#ffffff06 1px,transparent 1px) 0 0/46px 100%;
+  mask-image:radial-gradient(130% 100% at 50% 0%,#000 30%,transparent 85%)}
+.stage::after{content:"";position:absolute;inset:0;pointer-events:none;
+  box-shadow:inset 0 0 160px 20px #0009}
+
 .scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;padding:clamp(18px,4vw,54px);opacity:0;visibility:hidden;pointer-events:none}
+  text-align:center;padding:clamp(20px,4vw,56px) clamp(18px,4vw,54px) clamp(58px,9vw,96px);
+  opacity:0;visibility:hidden;pointer-events:none}
 .scene.active{opacity:1;visibility:visible;pointer-events:auto}
 .eyebrow{font-family:var(--mono);font-size:clamp(10px,1.2vw,12px);letter-spacing:4px;text-transform:uppercase;
   color:var(--brass);margin-bottom:14px}
 .scene h1{font-family:var(--disp);font-weight:700;line-height:1.02;letter-spacing:-.5px;
   font-size:clamp(30px,6.2vw,66px);text-wrap:balance}
 .scene h2{font-family:var(--disp);font-weight:600;line-height:1.05;font-size:clamp(24px,4.4vw,44px);text-wrap:balance}
-.scene p.sub{color:var(--mut);font-size:clamp(14px,1.9vw,20px);max-width:46ch;margin-top:16px;line-height:1.5;text-wrap:balance}
+.scene p.sub{color:var(--mut);font-size:clamp(14px,1.9vw,20px);max-width:48ch;margin-top:16px;line-height:1.5;text-wrap:balance}
 .accent{color:var(--brass)}
 .cy{color:var(--cyan)}
+
 @keyframes up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
 @keyframes pop{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:none}}
 @keyframes glow{0%,100%{filter:drop-shadow(0 0 14px #e6a94e44)}50%{filter:drop-shadow(0 0 30px #e6a94eaa)}}
@@ -57,12 +71,18 @@ body{
 @keyframes slideR{from{opacity:0;transform:translateX(50px)}to{opacity:1;transform:none}}
 @keyframes shake{10%,90%{transform:translateX(-3px)}30%,70%{transform:translateX(6px)}50%{transform:translateX(-8px)}}
 @keyframes vanish{to{opacity:.08;transform:scale(.7) translateY(18px)}}
+@keyframes type{from{width:0}to{width:100%}}
+@keyframes blink{50%{opacity:0}}
+
 .scene.active .r{animation:up .7s both}
 .scene.active .r2{animation:up .7s .18s both}
 .scene.active .r3{animation:up .7s .36s both}
 .scene.active .r4{animation:up .7s .54s both}
+
 .seal-big{font-size:clamp(70px,13vw,140px);color:var(--brass)}
 .scene.active .seal-big{animation:pop .8s both,glow 3.2s 1s ease-in-out infinite}
+
+/* phone (problem scene) */
 .phone{width:clamp(74px,12vw,110px);aspect-ratio:9/19;border:3px solid var(--line);border-radius:16px;
   background:#0e1622;display:grid;grid-template-columns:repeat(3,1fr);gap:7px;padding:16px 10px;align-content:start;margin-bottom:8px}
 .phone i{display:block;aspect-ratio:1;border-radius:7px;background:var(--steel2);border:1px solid var(--line)}
@@ -74,8 +94,10 @@ body{
 .scene.active .phone i:nth-child(6){animation-delay:1.5s}
 .scene.active .phone i:nth-child(1){animation-delay:1.7s}
 .scene.active .phone i:nth-child(5){animation-delay:1.9s}
+
+/* binding */
 .binding{display:flex;align-items:center;justify-content:center;gap:clamp(8px,1.6vw,18px);flex-wrap:wrap;margin:8px 0 20px}
-.factor{width:clamp(120px,15vw,160px);background:var(--steel2);border:1px solid var(--line);border-radius:14px;padding:16px 12px}
+.factor{width:clamp(118px,15vw,158px);background:var(--steel2);border:1px solid var(--line);border-radius:14px;padding:16px 12px}
 .factor .ic{font-size:30px}
 .factor h4{font-family:var(--disp);font-size:15px;margin:8px 0 3px}
 .factor small{color:var(--mut);font-size:12px;line-height:1.3;display:block}
@@ -91,8 +113,10 @@ body{
 .scene.active .plus:nth-child(4){animation-delay:.5s}
 .scene.active .plus.eq{animation-delay:.78s}
 .formula{font-family:var(--mono);font-size:clamp(11px,1.5vw,15px);color:var(--cyan);background:#0a0f17;
-  border:1px solid var(--line);border-radius:10px;padding:14px 18px;max-width:92%;overflow-x:auto;line-height:1.7;text-align:left;white-space:pre}
+  border:1px solid var(--line);border-radius:10px;padding:14px 18px;max-width:94%;overflow-x:auto;line-height:1.7;text-align:left;white-space:pre}
 .scene.active .formula{animation:up .7s 1.2s both}
+
+/* pipeline (flow scene) */
 .pipe{display:flex;align-items:center;justify-content:center;gap:clamp(6px,1.4vw,16px);flex-wrap:wrap;margin-top:10px}
 .node{background:var(--steel2);border:1px solid var(--line);border-radius:14px;padding:18px 20px;min-width:140px}
 .node .ic{font-size:28px}.node h4{font-family:var(--disp);font-size:16px;margin:6px 0 3px}
@@ -104,6 +128,33 @@ body{
 .scene.active .arrow{animation:pop .5s both}
 .scene.active .arrow:nth-child(2){animation-delay:.25s}
 .scene.active .arrow:nth-child(4){animation-delay:.55s}
+
+/* architecture scene */
+.mods{display:flex;gap:clamp(8px,1.6vw,18px);flex-wrap:wrap;justify-content:center;margin-top:8px}
+.modcard{width:clamp(150px,22vw,230px);background:var(--steel2);border:1px solid var(--line);border-radius:14px;padding:18px 16px;text-align:left}
+.modcard .ic{font-size:26px}
+.modcard h4{font-family:var(--mono);color:var(--brass);font-weight:500;font-size:16px;margin:8px 0 6px}
+.modcard small{color:var(--mut);font-size:12.5px;line-height:1.45;display:block}
+.scene.active .modcard{animation:up .6s both}
+.scene.active .modcard:nth-child(2){animation-delay:.22s}
+.scene.active .modcard:nth-child(3){animation-delay:.44s}
+
+/* terminal (install scene) */
+.term{width:min(100%,560px);background:#0a0f17;border:1px solid var(--line);border-radius:12px;overflow:hidden;text-align:left;margin-top:6px}
+.term .tbar{display:flex;gap:6px;padding:10px 14px;border-bottom:1px solid var(--line);background:#111a27}
+.term .tbar i{width:11px;height:11px;border-radius:50%;background:#2a3547;display:block}
+.term .tbar i:nth-child(1){background:#e5604f}.term .tbar i:nth-child(2){background:#e6a94e}.term .tbar i:nth-child(3){background:#4ec98a}
+.term .body{padding:16px 18px;font-family:var(--mono);font-size:clamp(11px,1.5vw,14px);line-height:1.9}
+.term .ln{white-space:nowrap;overflow:hidden}
+.term .pr{color:var(--brass)}.term .cmd{color:var(--ink)}.term .cm{color:var(--faint)}.term .okc{color:var(--ok)}
+.scene.active .term .ln{width:0;animation:type .7s steps(40) both}
+.scene.active .term .ln:nth-child(1){animation-delay:.2s}
+.scene.active .term .ln:nth-child(2){animation-delay:1.0s}
+.scene.active .term .ln:nth-child(3){animation-delay:1.8s}
+.scene.active .term .ln:nth-child(4){animation-delay:2.6s}
+.scene.active .term .ln:nth-child(5){animation-delay:3.4s}
+
+/* whatsapp chat */
 .chat{width:min(100%,420px);display:flex;flex-direction:column;gap:9px;margin-top:10px}
 .msg{max-width:78%;padding:9px 13px;border-radius:12px;font-size:14px;line-height:1.35;text-align:left}
 .msg.them{align-self:flex-start;background:var(--steel2);border:1px solid var(--line)}
@@ -113,9 +164,11 @@ body{
 .scene.active .msg:nth-child(2){animation-delay:.7s}
 .scene.active .msg:nth-child(3){animation-delay:1.2s}
 .scene.active .msg:nth-child(4){animation-delay:1.7s}
-.vault{position:relative;width:clamp(120px,16vw,170px);aspect-ratio:1;border-radius:18px;
+
+/* proof scene */
+.vault{position:relative;width:clamp(110px,15vw,160px);aspect-ratio:1;border-radius:18px;
   background:linear-gradient(145deg,#1b2534,#0f1724);border:2px solid var(--line);
-  display:grid;place-items:center;font-size:clamp(46px,8vw,70px);color:var(--brass)}
+  display:grid;place-items:center;font-size:clamp(44px,8vw,66px);color:var(--brass)}
 .attempts{display:flex;flex-direction:column;gap:8px;margin-top:18px;min-height:120px;align-items:center}
 .chip{font-family:var(--mono);font-size:13px;padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:var(--steel2);display:flex;gap:8px;align-items:center}
 .chip.bad{color:var(--bad);border-color:#e5604f55}
@@ -125,7 +178,9 @@ body{
 .scene.active .chip:nth-child(2){animation:slideR .5s 1.5s both,shake .5s 2.0s both}
 .scene.active .chip:nth-child(3){animation:slideR .5s 2.4s both,shake .5s 2.9s both}
 .scene.active .chip:nth-child(4){animation:up .6s 3.4s both}
-.limits{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:18px;max-width:60ch;text-align:left}
+
+/* limits */
+.limits{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:18px;max-width:62ch;text-align:left}
 .limits li{display:flex;gap:12px;align-items:flex-start;color:var(--mut);font-size:clamp(13px,1.7vw,16px);line-height:1.45}
 .limits .t{color:var(--brass);font-family:var(--mono);flex:none}
 .limits b{color:var(--ink);font-weight:600}
@@ -133,6 +188,8 @@ body{
 .scene.active .limits li:nth-child(2){animation-delay:.2s}
 .scene.active .limits li:nth-child(3){animation-delay:.4s}
 .scene.active .limits li:nth-child(4){animation-delay:.6s}
+
+/* end card */
 .links{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:24px}
 .lnk{font-family:var(--mono);font-size:13px;color:var(--ink);border:1px solid var(--line);background:var(--steel2);
   padding:10px 18px;border-radius:10px;text-decoration:none}
@@ -141,9 +198,20 @@ body{
 .sig b{color:var(--mut)}
 .scene.active .links{animation:up .7s .5s both}
 .scene.active .sig{animation:up .7s .8s both}
+
+/* caption / narration band */
+.caption{position:absolute;left:0;right:0;bottom:0;padding:14px clamp(18px,4vw,40px);
+  background:linear-gradient(180deg,transparent,#060a10 60%);pointer-events:none}
+.caption p{margin:0 auto;max-width:70ch;font-size:clamp(13px,1.8vw,17px);line-height:1.45;
+  color:#dfe8f1;text-wrap:balance;text-shadow:0 1px 6px #000a}
+.caption .who{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--brass);display:block;margin-bottom:5px}
+.scene.active .caption{animation:up .6s .2s both}
+
+/* controls */
 .controls{display:flex;align-items:center;gap:14px;padding:12px 18px;border-top:1px solid var(--line);background:#101826}
-.tk{flex:1;height:5px;background:#0a0f17;border-radius:4px;overflow:hidden;cursor:pointer}
+.tk{flex:1;height:6px;background:#0a0f17;border-radius:4px;overflow:visible;cursor:pointer;position:relative}
 .fill{height:100%;width:0;background:linear-gradient(90deg,var(--brass-dim),var(--brass));border-radius:4px}
+.tick{position:absolute;top:50%;width:2px;height:10px;transform:translate(-50%,-50%);background:#2a3547;border-radius:2px}
 .btn{width:38px;height:38px;border-radius:9px;border:1px solid var(--line);background:var(--steel2);color:var(--ink);
   font-size:15px;cursor:pointer;display:grid;place-items:center;transition:background .15s,border-color .15s}
 .btn:hover{background:#20293a;border-color:var(--brass)}
@@ -151,8 +219,9 @@ body{
 .dots{display:flex;gap:7px}
 .dot{width:9px;height:9px;border-radius:50%;background:#2a3547;border:none;cursor:pointer;padding:0}
 .dot.on{background:var(--brass)}
-.count{font-family:var(--mono);font-size:12px;color:var(--mut);min-width:42px;text-align:right}
-@media (max-width:560px){.dots{display:none}.scenelabel{display:none}}
+.count{font-family:var(--mono);font-size:12px;color:var(--mut);min-width:48px;text-align:right}
+.hint{font-family:var(--mono);font-size:11px;color:var(--faint);text-align:center;padding:7px;border-top:1px solid var(--line);background:#0d1521}
+@media (max-width:620px){.dots{display:none}.scenelabel{display:none}.hint{display:none}}
 @media (prefers-reduced-motion:reduce){.scene *,.scene{animation:none!important}}
 </style>
 </head>
@@ -162,19 +231,25 @@ body{
     <div class="brand"><span class="seal">⛨</span>Arca<small>Cofre de Recuperação Android</small></div>
     <div class="scenelabel" id="scenelabel">Abertura</div>
   </div>
+
   <div class="stage" id="stage">
-    <section class="scene" data-label="Abertura" data-dur="6500">
+
+    <section class="scene" data-label="Abertura" data-dur="7000">
       <div class="seal-big r">⛨</div>
       <h1 class="r2">O seu Android,<br><span class="accent">selado.</span></h1>
       <p class="sub r3">Clone apps, dados e WhatsApp num cofre cifrado — e recupere tudo em caso de perda.</p>
+      <div class="caption"><p><span class="who">Arca</span>Um cofre que guarda a cópia do seu aparelho e devolve tudo quando você precisar.</p></div>
     </section>
-    <section class="scene" data-label="O problema" data-dur="8000">
+
+    <section class="scene" data-label="O problema" data-dur="8500">
       <div class="eyebrow r">o problema</div>
       <div class="phone r2" aria-hidden="true"><i class="wa"></i><i></i><i></i><i></i><i></i><i></i></div>
       <h2 class="r3">E se você <span class="accent">perder o celular?</span></h2>
       <p class="sub r4">Conversas, fotos, logins, anos de histórico — tudo some junto com o aparelho.</p>
+      <div class="caption"><p><span class="who">O problema</span>Perder o celular é perder a vida digital inteira de uma vez. O Arca existe para que isso não seja definitivo.</p></div>
     </section>
-    <section class="scene" data-label="O binding" data-dur="11000">
+
+    <section class="scene" data-label="O binding" data-dur="12000">
       <div class="eyebrow r">a senha que converge</div>
       <div class="binding" aria-hidden="true">
         <div class="factor"><div class="ic">🔑</div><h4>Senha</h4><small>algo que você sabe</small></div>
@@ -188,8 +263,21 @@ body{
       <div class="formula r">master = HMAC( PBKDF2-SHA256(senha, 600000) ,
          HMAC(chave_operador, impressão_do_aparelho) )
 cofre  = AES-256-GCM(payload, master)   // em blocos, autenticado</div>
+      <div class="caption"><p><span class="who">O binding</span>A chave não fica guardada: ela só se recompõe quando a senha, a chave do operador e o próprio aparelho se encontram.</p></div>
     </section>
-    <section class="scene" data-label="O fluxo" data-dur="8500">
+
+    <section class="scene" data-label="Arquitetura" data-dur="10000">
+      <div class="eyebrow r">três módulos auditáveis</div>
+      <h2 class="r2">Arquitetura <span class="accent">enxuta</span></h2>
+      <div class="mods" aria-hidden="true">
+        <div class="modcard"><div class="ic">🔐</div><h4>vault</h4><small>Núcleo de cripto: binding, cifragem em blocos, init · seal · open · info.</small></div>
+        <div class="modcard"><div class="ic">📥</div><h4>collector</h4><small>Coleta no device sob root; orquestra o pull e trata o WhatsApp.</small></div>
+        <div class="modcard"><div class="ic">🖥️</div><h4>viewer</h4><small>Exporta o banco em JSON e serve a timeline local das conversas.</small></div>
+      </div>
+      <div class="caption"><p><span class="who">Arquitetura</span>Cada módulo tem uma única responsabilidade — e pode ser lido e auditado isoladamente.</p></div>
+    </section>
+
+    <section class="scene" data-label="O fluxo" data-dur="9000">
       <div class="eyebrow r">como funciona</div>
       <div class="pipe" aria-hidden="true">
         <div class="node"><div class="ic">📱</div><h4>Clonar</h4><small>APKs · dados · WhatsApp</small></div>
@@ -199,8 +287,25 @@ cofre  = AES-256-GCM(payload, master)   // em blocos, autenticado</div>
         <div class="node"><div class="ic">💻</div><h4>Recuperar</h4><small>no PC, com a senha</small></div>
       </div>
       <p class="sub r">Root pelo caminho oficial (Magisk) — <span class="accent">nunca exploit.</span></p>
+      <div class="caption"><p><span class="who">O fluxo</span>Clonar o aparelho, selar o cofre, recuperar no PC. Simples de usar, honesto no que faz.</p></div>
     </section>
-    <section class="scene" data-label="WhatsApp" data-dur="8500">
+
+    <section class="scene" data-label="Instalação" data-dur="10000">
+      <div class="eyebrow r">cinco comandos</div>
+      <div class="term r2" aria-hidden="true">
+        <div class="tbar"><i></i><i></i><i></i></div>
+        <div class="body">
+          <div class="ln"><span class="pr">PS&gt;</span> <span class="cmd">./install.ps1</span> <span class="cm"># dependências</span></div>
+          <div class="ln"><span class="pr">PS&gt;</span> <span class="cmd">arca-vault.ps1 init -OperatorKey .\operator.key</span></div>
+          <div class="ln"><span class="pr">PS&gt;</span> <span class="cmd">arca-pull.ps1 -Out backup.arca -OperatorKey .\operator.key</span></div>
+          <div class="ln"><span class="pr">PS&gt;</span> <span class="cmd">arca-vault.ps1 open -In backup.arca -Out restored.tar ...</span></div>
+          <div class="ln"><span class="okc">✓ cofre aberto — apps e WhatsApp recuperados</span></div>
+        </div>
+      </div>
+      <div class="caption"><p><span class="who">Instalação</span>Do zero ao backup recuperado em cinco comandos de PowerShell. Sem interface escondendo o que acontece.</p></div>
+    </section>
+
+    <section class="scene" data-label="WhatsApp" data-dur="9000">
       <div class="eyebrow r">recuperação do whatsapp</div>
       <h2 class="r2">O histórico <span class="accent">de volta.</span></h2>
       <div class="chat" aria-hidden="true">
@@ -209,8 +314,10 @@ cofre  = AES-256-GCM(payload, master)   // em blocos, autenticado</div>
         <div class="msg them">E as conversas???</div>
         <div class="msg me">Recuperei tudo com o Arca ✅</div>
       </div>
+      <div class="caption"><p><span class="who">WhatsApp</span>O cofre descriptografa o msgstore e devolve a timeline das conversas, com os nomes dos contatos.</p></div>
     </section>
-    <section class="scene" data-label="Prova de segurança" data-dur="9500">
+
+    <section class="scene" data-label="Prova de segurança" data-dur="10500">
       <div class="eyebrow r">testado de verdade</div>
       <div class="vault" aria-hidden="true">🔒</div>
       <div class="attempts" aria-hidden="true">
@@ -219,8 +326,10 @@ cofre  = AES-256-GCM(payload, master)   // em blocos, autenticado</div>
         <div class="chip bad">✕ aparelho errado — rejeitado</div>
         <div class="chip ok">✓ três fatores corretos — cofre aberto</div>
       </div>
+      <div class="caption"><p><span class="who">Prova</span>Verificado em teste: faltando qualquer um dos três fatores, o cofre permanece fechado.</p></div>
     </section>
-    <section class="scene" data-label="Limites honestos" data-dur="9500">
+
+    <section class="scene" data-label="Limites honestos" data-dur="10000">
       <div class="eyebrow r">sem promessa falsa</div>
       <ul class="limits">
         <li class="r"><span class="t">01</span><span>Recuperação = <b>arquivo legível</b> + reinstalação de APKs. Rodar todo app num emulador é best-effort.</span></li>
@@ -228,8 +337,10 @@ cofre  = AES-256-GCM(payload, master)   // em blocos, autenticado</div>
         <li class="r3"><span class="t">03</span><span>Precisa de <b>root</b>. Aparelhos de operadora muitas vezes não destravam.</span></li>
         <li class="r4"><span class="t">04</span><span>Ferramenta para o <b>seu próprio</b> aparelho, com consentimento.</span></li>
       </ul>
+      <div class="caption"><p><span class="who">Limites honestos</span>O Arca promete só o que entrega. Sem contornar verificações de terceiros, sem exploit, sem mágica.</p></div>
     </section>
-    <section class="scene" data-label="Encerramento" data-dur="9000">
+
+    <section class="scene" data-label="Encerramento" data-dur="10000">
       <div class="seal-big r">⛨</div>
       <h2 class="r2">Arca</h2>
       <p class="sub r3">Código aberto · Licença MIT</p>
@@ -238,17 +349,22 @@ cofre  = AES-256-GCM(payload, master)   // em blocos, autenticado</div>
         <a class="lnk" href="https://elevbit-ai.github.io/arca/">elevbit-ai.github.io/arca</a>
       </div>
       <div class="sig">Autor: <b>Joaquim Pedro de Morais Filho</b> · j360074@hotmail.com</div>
+      <div class="caption"><p><span class="who">Arca</span>Um projeto de Joaquim Pedro de Morais Filho. Código aberto, auditável, sob licença MIT.</p></div>
     </section>
+
   </div>
+
   <div class="controls">
     <button class="btn" id="playBtn" aria-label="Pausar">⏸</button>
     <button class="btn" id="prevBtn" aria-label="Cena anterior">⏮</button>
     <button class="btn" id="nextBtn" aria-label="Próxima cena">⏭</button>
     <div class="tk" id="track" role="progressbar" aria-label="Progresso"><div class="fill" id="fill"></div></div>
     <div class="dots" id="dots"></div>
-    <div class="count" id="count">1 / 8</div>
+    <div class="count" id="count">1 / 10</div>
   </div>
+  <div class="hint">Espaço: pausar · ← → : trocar de cena · clique na barra para avançar</div>
 </div>
+
 <script>
 (function(){
   "use strict";
@@ -258,12 +374,23 @@ cofre  = AES-256-GCM(payload, master)   // em blocos, autenticado</div>
       playBtn=document.getElementById('playBtn'),track=document.getElementById('track');
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
   var idx=0,playing=!reduce,elapsed=0,last=0;
+
+  function dur(i){return parseInt(scenes[i].dataset.dur,10)||8000;}
+  var total=scenes.reduce(function(a,_,i){return a+dur(i);},0);
+
+  // one dot per scene; one progress tick at each scene boundary
+  var acc=0;
   scenes.forEach(function(s,i){
     var d=document.createElement('button');d.className='dot';d.setAttribute('aria-label','Cena '+(i+1));
     d.onclick=function(){go(i);};dotsWrap.appendChild(d);
+    acc+=dur(i);
+    if(i<scenes.length-1){
+      var t=document.createElement('div');t.className='tick';
+      t.style.left=(acc/total*100)+'%';track.appendChild(t);
+    }
   });
   var dots=[].slice.call(dotsWrap.children);
-  function dur(i){return parseInt(scenes[i].dataset.dur,10)||8000;}
+
   function go(i){
     idx=(i+scenes.length)%scenes.length;elapsed=0;
     scenes.forEach(function(s,j){s.classList.toggle('active',j===idx);});
