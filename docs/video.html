@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arca em Movimento — Vídeo Explicativo</title>
+<meta name="description" content="Vídeo explicativo animado do Arca — cofre cifrado que clona o Android e recupera apps e WhatsApp. Autor: Joaquim Pedro de Morais Filho.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --ground:#090d14; --steel:#111826; --steel2:#18212f; --line:#243141;
+  --ink:#eef3f8; --mut:#93a2b4; --faint:#5e6f82;
+  --brass:#e6a94e; --brass-dim:#b9842f; --cyan:#5bb8d4;
+  --ok:#4ec98a; --bad:#e5604f;
+  --disp:"Chakra Petch",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  background:var(--ground);color:var(--ink);font-family:var(--body);
+  display:flex;align-items:center;justify-content:center;padding:clamp(8px,2vw,28px);
+  -webkit-font-smoothing:antialiased;
+}
+.player{
+  width:min(100%,1000px);background:var(--steel);border:1px solid var(--line);
+  border-radius:16px;overflow:hidden;box-shadow:0 30px 80px -30px #000,0 0 0 1px #0006;
+  display:flex;flex-direction:column;
+}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:12px 18px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#18212f,#121a27)}
+.brand{font-family:var(--disp);font-weight:700;font-size:18px;letter-spacing:.5px;display:flex;align-items:center;gap:9px}
+.brand .seal{color:var(--brass);font-size:20px;filter:drop-shadow(0 0 10px #e6a94e55)}
+.brand small{color:var(--faint);font-weight:500;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-left:4px}
+.scenelabel{font-family:var(--mono);font-size:12px;color:var(--mut);letter-spacing:.5px}
+.stage{position:relative;aspect-ratio:16/9;background:
+  radial-gradient(120% 90% at 50% 0%,#17202e 0%,#0c121c 55%,#080c13 100%);
+  overflow:hidden}
+.scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:clamp(18px,4vw,54px);opacity:0;visibility:hidden;pointer-events:none}
+.scene.active{opacity:1;visibility:visible;pointer-events:auto}
+.eyebrow{font-family:var(--mono);font-size:clamp(10px,1.2vw,12px);letter-spacing:4px;text-transform:uppercase;
+  color:var(--brass);margin-bottom:14px}
+.scene h1{font-family:var(--disp);font-weight:700;line-height:1.02;letter-spacing:-.5px;
+  font-size:clamp(30px,6.2vw,66px);text-wrap:balance}
+.scene h2{font-family:var(--disp);font-weight:600;line-height:1.05;font-size:clamp(24px,4.4vw,44px);text-wrap:balance}
+.scene p.sub{color:var(--mut);font-size:clamp(14px,1.9vw,20px);max-width:46ch;margin-top:16px;line-height:1.5;text-wrap:balance}
+.accent{color:var(--brass)}
+.cy{color:var(--cyan)}
+@keyframes up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:none}}
+@keyframes glow{0%,100%{filter:drop-shadow(0 0 14px #e6a94e44)}50%{filter:drop-shadow(0 0 30px #e6a94eaa)}}
+@keyframes slideL{from{opacity:0;transform:translateX(-50px)}to{opacity:1;transform:none}}
+@keyframes slideR{from{opacity:0;transform:translateX(50px)}to{opacity:1;transform:none}}
+@keyframes shake{10%,90%{transform:translateX(-3px)}30%,70%{transform:translateX(6px)}50%{transform:translateX(-8px)}}
+@keyframes vanish{to{opacity:.08;transform:scale(.7) translateY(18px)}}
+.scene.active .r{animation:up .7s both}
+.scene.active .r2{animation:up .7s .18s both}
+.scene.active .r3{animation:up .7s .36s both}
+.scene.active .r4{animation:up .7s .54s both}
+.seal-big{font-size:clamp(70px,13vw,140px);color:var(--brass)}
+.scene.active .seal-big{animation:pop .8s both,glow 3.2s 1s ease-in-out infinite}
+.phone{width:clamp(74px,12vw,110px);aspect-ratio:9/19;border:3px solid var(--line);border-radius:16px;
+  background:#0e1622;display:grid;grid-template-columns:repeat(3,1fr);gap:7px;padding:16px 10px;align-content:start;margin-bottom:8px}
+.phone i{display:block;aspect-ratio:1;border-radius:7px;background:var(--steel2);border:1px solid var(--line)}
+.phone i.wa{background:#1f6f54}
+.scene.active .phone{animation:pop .7s both}
+.scene.active .phone i{animation:vanish .8s both}
+.scene.active .phone i:nth-child(2){animation-delay:1.0s}
+.scene.active .phone i:nth-child(4){animation-delay:1.25s}
+.scene.active .phone i:nth-child(6){animation-delay:1.5s}
+.scene.active .phone i:nth-child(1){animation-delay:1.7s}
+.scene.active .phone i:nth-child(5){animation-delay:1.9s}
+.binding{display:flex;align-items:center;justify-content:center;gap:clamp(8px,1.6vw,18px);flex-wrap:wrap;margin:8px 0 20px}
+.factor{width:clamp(120px,15vw,160px);background:var(--steel2);border:1px solid var(--line);border-radius:14px;padding:16px 12px}
+.factor .ic{font-size:30px}
+.factor h4{font-family:var(--disp);font-size:15px;margin:8px 0 3px}
+.factor small{color:var(--mut);font-size:12px;line-height:1.3;display:block}
+.factor.key{border-color:#e6a94e55;box-shadow:0 0 0 1px #e6a94e33,0 0 30px -8px #e6a94e66}
+.plus{font-family:var(--disp);font-size:26px;color:var(--faint)}
+.scene.active .factor{animation:pop .6s both}
+.scene.active .factor:nth-child(1){animation-delay:.1s}
+.scene.active .factor:nth-child(3){animation-delay:.35s}
+.scene.active .factor:nth-child(5){animation-delay:.6s}
+.scene.active .factor.key{animation:pop .7s .95s both,glow 3s 1.6s ease-in-out infinite}
+.scene.active .plus{animation:pop .5s both}
+.scene.active .plus:nth-child(2){animation-delay:.25s}
+.scene.active .plus:nth-child(4){animation-delay:.5s}
+.scene.active .plus.eq{animation-delay:.78s}
+.formula{font-family:var(--mono);font-size:clamp(11px,1.5vw,15px);color:var(--cyan);background:#0a0f17;
+  border:1px solid var(--line);border-radius:10px;padding:14px 18px;max-width:92%;overflow-x:auto;line-height:1.7;text-align:left;white-space:pre}
+.scene.active .formula{animation:up .7s 1.2s both}
+.pipe{display:flex;align-items:center;justify-content:center;gap:clamp(6px,1.4vw,16px);flex-wrap:wrap;margin-top:10px}
+.node{background:var(--steel2);border:1px solid var(--line);border-radius:14px;padding:18px 20px;min-width:140px}
+.node .ic{font-size:28px}.node h4{font-family:var(--disp);font-size:16px;margin:6px 0 3px}
+.node small{color:var(--mut);font-size:12px}
+.arrow{color:var(--brass);font-size:26px}
+.scene.active .node{animation:slideL .6s both}
+.scene.active .node:nth-child(3){animation-delay:.3s}
+.scene.active .node:nth-child(5){animation-delay:.6s}
+.scene.active .arrow{animation:pop .5s both}
+.scene.active .arrow:nth-child(2){animation-delay:.25s}
+.scene.active .arrow:nth-child(4){animation-delay:.55s}
+.chat{width:min(100%,420px);display:flex;flex-direction:column;gap:9px;margin-top:10px}
+.msg{max-width:78%;padding:9px 13px;border-radius:12px;font-size:14px;line-height:1.35;text-align:left}
+.msg.them{align-self:flex-start;background:var(--steel2);border:1px solid var(--line)}
+.msg.me{align-self:flex-end;background:#2a4d3f;border:1px solid #37664f}
+.scene.active .msg{animation:up .6s both}
+.scene.active .msg:nth-child(1){animation-delay:.2s}
+.scene.active .msg:nth-child(2){animation-delay:.7s}
+.scene.active .msg:nth-child(3){animation-delay:1.2s}
+.scene.active .msg:nth-child(4){animation-delay:1.7s}
+.vault{position:relative;width:clamp(120px,16vw,170px);aspect-ratio:1;border-radius:18px;
+  background:linear-gradient(145deg,#1b2534,#0f1724);border:2px solid var(--line);
+  display:grid;place-items:center;font-size:clamp(46px,8vw,70px);color:var(--brass)}
+.attempts{display:flex;flex-direction:column;gap:8px;margin-top:18px;min-height:120px;align-items:center}
+.chip{font-family:var(--mono);font-size:13px;padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:var(--steel2);display:flex;gap:8px;align-items:center}
+.chip.bad{color:var(--bad);border-color:#e5604f55}
+.chip.ok{color:var(--ok);border-color:#4ec98a66}
+.scene.active .vault{animation:pop .7s both}
+.scene.active .chip:nth-child(1){animation:slideR .5s .6s both,shake .5s 1.1s both}
+.scene.active .chip:nth-child(2){animation:slideR .5s 1.5s both,shake .5s 2.0s both}
+.scene.active .chip:nth-child(3){animation:slideR .5s 2.4s both,shake .5s 2.9s both}
+.scene.active .chip:nth-child(4){animation:up .6s 3.4s both}
+.limits{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:18px;max-width:60ch;text-align:left}
+.limits li{display:flex;gap:12px;align-items:flex-start;color:var(--mut);font-size:clamp(13px,1.7vw,16px);line-height:1.45}
+.limits .t{color:var(--brass);font-family:var(--mono);flex:none}
+.limits b{color:var(--ink);font-weight:600}
+.scene.active .limits li{animation:slideL .55s both}
+.scene.active .limits li:nth-child(2){animation-delay:.2s}
+.scene.active .limits li:nth-child(3){animation-delay:.4s}
+.scene.active .limits li:nth-child(4){animation-delay:.6s}
+.links{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:24px}
+.lnk{font-family:var(--mono);font-size:13px;color:var(--ink);border:1px solid var(--line);background:var(--steel2);
+  padding:10px 18px;border-radius:10px;text-decoration:none}
+.lnk.brass{border-color:var(--brass);color:var(--brass)}
+.sig{margin-top:22px;color:var(--faint);font-size:13px;font-family:var(--mono)}
+.sig b{color:var(--mut)}
+.scene.active .links{animation:up .7s .5s both}
+.scene.active .sig{animation:up .7s .8s both}
+.controls{display:flex;align-items:center;gap:14px;padding:12px 18px;border-top:1px solid var(--line);background:#101826}
+.tk{flex:1;height:5px;background:#0a0f17;border-radius:4px;overflow:hidden;cursor:pointer}
+.fill{height:100%;width:0;background:linear-gradient(90deg,var(--brass-dim),var(--brass));border-radius:4px}
+.btn{width:38px;height:38px;border-radius:9px;border:1px solid var(--line);background:var(--steel2);color:var(--ink);
+  font-size:15px;cursor:pointer;display:grid;place-items:center;transition:background .15s,border-color .15s}
+.btn:hover{background:#20293a;border-color:var(--brass)}
+.btn:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+.dots{display:flex;gap:7px}
+.dot{width:9px;height:9px;border-radius:50%;background:#2a3547;border:none;cursor:pointer;padding:0}
+.dot.on{background:var(--brass)}
+.count{font-family:var(--mono);font-size:12px;color:var(--mut);min-width:42px;text-align:right}
+@media (max-width:560px){.dots{display:none}.scenelabel{display:none}}
+@media (prefers-reduced-motion:reduce){.scene *,.scene{animation:none!important}}
+</style>
+</head>
+<body>
+<div class="player" role="region" aria-label="Vídeo explicativo do Arca">
+  <div class="bar">
+    <div class="brand"><span class="seal">⛨</span>Arca<small>Cofre de Recuperação Android</small></div>
+    <div class="scenelabel" id="scenelabel">Abertura</div>
+  </div>
+  <div class="stage" id="stage">
+    <section class="scene" data-label="Abertura" data-dur="6500">
+      <div class="seal-big r">⛨</div>
+      <h1 class="r2">O seu Android,<br><span class="accent">selado.</span></h1>
+      <p class="sub r3">Clone apps, dados e WhatsApp num cofre cifrado — e recupere tudo em caso de perda.</p>
+    </section>
+    <section class="scene" data-label="O problema" data-dur="8000">
+      <div class="eyebrow r">o problema</div>
+      <div class="phone r2" aria-hidden="true"><i class="wa"></i><i></i><i></i><i></i><i></i><i></i></div>
+      <h2 class="r3">E se você <span class="accent">perder o celular?</span></h2>
+      <p class="sub r4">Conversas, fotos, logins, anos de histórico — tudo some junto com o aparelho.</p>
+    </section>
+    <section class="scene" data-label="O binding" data-dur="11000">
+      <div class="eyebrow r">a senha que converge</div>
+      <div class="binding" aria-hidden="true">
+        <div class="factor"><div class="ic">🔑</div><h4>Senha</h4><small>algo que você sabe</small></div>
+        <div class="plus">+</div>
+        <div class="factor"><div class="ic">💾</div><h4>Chave do operador</h4><small>quem clona</small></div>
+        <div class="plus">+</div>
+        <div class="factor"><div class="ic">📱</div><h4>Impressão</h4><small>o aparelho</small></div>
+        <div class="plus eq">=</div>
+        <div class="factor key"><div class="ic">⛨</div><h4>Chave AES-256</h4><small>abre o cofre</small></div>
+      </div>
+      <div class="formula r">master = HMAC( PBKDF2-SHA256(senha, 600000) ,
+         HMAC(chave_operador, impressão_do_aparelho) )
+cofre  = AES-256-GCM(payload, master)   // em blocos, autenticado</div>
+    </section>
+    <section class="scene" data-label="O fluxo" data-dur="8500">
+      <div class="eyebrow r">como funciona</div>
+      <div class="pipe" aria-hidden="true">
+        <div class="node"><div class="ic">📱</div><h4>Clonar</h4><small>APKs · dados · WhatsApp</small></div>
+        <div class="arrow">→</div>
+        <div class="node"><div class="ic">⛨</div><h4>Cofre</h4><small>.arca cifrado</small></div>
+        <div class="arrow">→</div>
+        <div class="node"><div class="ic">💻</div><h4>Recuperar</h4><small>no PC, com a senha</small></div>
+      </div>
+      <p class="sub r">Root pelo caminho oficial (Magisk) — <span class="accent">nunca exploit.</span></p>
+    </section>
+    <section class="scene" data-label="WhatsApp" data-dur="8500">
+      <div class="eyebrow r">recuperação do whatsapp</div>
+      <h2 class="r2">O histórico <span class="accent">de volta.</span></h2>
+      <div class="chat" aria-hidden="true">
+        <div class="msg them">Cadê você? Sumiu!</div>
+        <div class="msg me">Perdi o celular 😅</div>
+        <div class="msg them">E as conversas???</div>
+        <div class="msg me">Recuperei tudo com o Arca ✅</div>
+      </div>
+    </section>
+    <section class="scene" data-label="Prova de segurança" data-dur="9500">
+      <div class="eyebrow r">testado de verdade</div>
+      <div class="vault" aria-hidden="true">🔒</div>
+      <div class="attempts" aria-hidden="true">
+        <div class="chip bad">✕ senha errada — rejeitada</div>
+        <div class="chip bad">✕ chave de operador errada — rejeitada</div>
+        <div class="chip bad">✕ aparelho errado — rejeitado</div>
+        <div class="chip ok">✓ três fatores corretos — cofre aberto</div>
+      </div>
+    </section>
+    <section class="scene" data-label="Limites honestos" data-dur="9500">
+      <div class="eyebrow r">sem promessa falsa</div>
+      <ul class="limits">
+        <li class="r"><span class="t">01</span><span>Recuperação = <b>arquivo legível</b> + reinstalação de APKs. Rodar todo app num emulador é best-effort.</span></li>
+        <li class="r2"><span class="t">02</span><span>Lê o histórico do WhatsApp; <b>não</b> contorna a verificação por número.</span></li>
+        <li class="r3"><span class="t">03</span><span>Precisa de <b>root</b>. Aparelhos de operadora muitas vezes não destravam.</span></li>
+        <li class="r4"><span class="t">04</span><span>Ferramenta para o <b>seu próprio</b> aparelho, com consentimento.</span></li>
+      </ul>
+    </section>
+    <section class="scene" data-label="Encerramento" data-dur="9000">
+      <div class="seal-big r">⛨</div>
+      <h2 class="r2">Arca</h2>
+      <p class="sub r3">Código aberto · Licença MIT</p>
+      <div class="links">
+        <a class="lnk brass" href="https://github.com/elevbit-ai/arca">github.com/elevbit-ai/arca</a>
+        <a class="lnk" href="https://elevbit-ai.github.io/arca/">elevbit-ai.github.io/arca</a>
+      </div>
+      <div class="sig">Autor: <b>Joaquim Pedro de Morais Filho</b> · j360074@hotmail.com</div>
+    </section>
+  </div>
+  <div class="controls">
+    <button class="btn" id="playBtn" aria-label="Pausar">⏸</button>
+    <button class="btn" id="prevBtn" aria-label="Cena anterior">⏮</button>
+    <button class="btn" id="nextBtn" aria-label="Próxima cena">⏭</button>
+    <div class="tk" id="track" role="progressbar" aria-label="Progresso"><div class="fill" id="fill"></div></div>
+    <div class="dots" id="dots"></div>
+    <div class="count" id="count">1 / 8</div>
+  </div>
+</div>
+<script>
+(function(){
+  "use strict";
+  var scenes=[].slice.call(document.querySelectorAll('.scene'));
+  var fill=document.getElementById('fill'),count=document.getElementById('count'),
+      label=document.getElementById('scenelabel'),dotsWrap=document.getElementById('dots'),
+      playBtn=document.getElementById('playBtn'),track=document.getElementById('track');
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var idx=0,playing=!reduce,elapsed=0,last=0;
+  scenes.forEach(function(s,i){
+    var d=document.createElement('button');d.className='dot';d.setAttribute('aria-label','Cena '+(i+1));
+    d.onclick=function(){go(i);};dotsWrap.appendChild(d);
+  });
+  var dots=[].slice.call(dotsWrap.children);
+  function dur(i){return parseInt(scenes[i].dataset.dur,10)||8000;}
+  function go(i){
+    idx=(i+scenes.length)%scenes.length;elapsed=0;
+    scenes.forEach(function(s,j){s.classList.toggle('active',j===idx);});
+    var a=scenes[idx];a.classList.remove('active');void a.offsetWidth;a.classList.add('active');
+    dots.forEach(function(d,j){d.classList.toggle('on',j===idx);});
+    count.textContent=(idx+1)+' / '+scenes.length;
+    label.textContent=scenes[idx].dataset.label;
+    fill.style.width='0%';
+  }
+  function setPlaying(p){
+    playing=p;playBtn.textContent=p?'⏸':'▶';
+    playBtn.setAttribute('aria-label',p?'Pausar':'Reproduzir');
+    if(p){last=performance.now();requestAnimationFrame(tick);}
+  }
+  function tick(now){
+    if(!playing)return;
+    var dt=now-last;last=now;elapsed+=dt;
+    var d=dur(idx),pct=Math.min(elapsed/d,1);
+    fill.style.width=(pct*100)+'%';
+    if(pct>=1){go(idx+1);}
+    requestAnimationFrame(tick);
+  }
+  playBtn.onclick=function(){setPlaying(!playing);};
+  document.getElementById('nextBtn').onclick=function(){go(idx+1);if(!playing)fill.style.width='0%';};
+  document.getElementById('prevBtn').onclick=function(){go(idx-1);if(!playing)fill.style.width='0%';};
+  track.onclick=function(e){var r=track.getBoundingClientRect();var p=(e.clientX-r.left)/r.width;elapsed=dur(idx)*p;fill.style.width=(p*100)+'%';};
+  document.addEventListener('keydown',function(e){
+    if(e.code==='Space'){e.preventDefault();setPlaying(!playing);}
+    else if(e.code==='ArrowRight'){go(idx+1);}
+    else if(e.code==='ArrowLeft'){go(idx-1);}
+  });
+  go(0);
+  if(playing){setPlaying(true);}else{playBtn.textContent='▶';fill.style.width='100%';}
+})();
+</script>
+</body>
+</html>

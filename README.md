@@ -1,0 +1,107 @@
+# Arca — Cofre de Recuperação Android
+
+**Arca** clona um aparelho Android para um **cofre cifrado** (`.arca`) e permite
+recuperar, no PC, os **apps instalados**, seus **dados privados** e o **conteúdo do
+WhatsApp** em caso de perda do aparelho — tudo protegido por uma senha que
+**converge quem clona e o aparelho**.
+
+> Autor: **Joaquim Pedro de Morais Filho** · `j360074@hotmail.com` · Licença MIT
+
+---
+
+## O que faz (e o que não faz)
+
+| Faz | Não faz |
+|---|---|
+| Empacota APKs, `/data/data` e mídia num cofre cifrado | **Não** cria root por exploit — usa o caminho oficial (Magisk) |
+| Extrai e descriptografa o WhatsApp (`msgstore.db`) | **Não** contorna o número de telefone para "mover" o WhatsApp |
+| Amarra o cofre a **senha + chave do operador + impressão do aparelho** | **Não** garante rodar todo app num emulador (attestation/Play Integrity bloqueiam) |
+| Visualizador local das conversas, com nomes de contato | **Não** lê dados de aparelho de terceiros — uso no **seu próprio** device |
+
+A recuperação é um **arquivo legível** e a reinstalação dos APKs; "simular o Android
+inteiro rodando no PC igual ao aparelho" é *best-effort* e não é prometido aqui.
+
+---
+
+## Modelo de segurança — o binding
+
+A chave do cofre é derivada de **três fatores**:
+
+```
+Kp     = PBKDF2-SHA256(senha, salt, 600000)                 # algo que você SABE
+B      = HMAC-SHA256(chave_operador, impressão_do_aparelho) # algo que você TEM + o aparelho
+master = HMAC-SHA256(Kp, B)                                 # chave AES-256 final
+cofre  = AES-256-GCM(payload, master)  # em blocos, autenticado
+```
+
+- **Senha** — segredo memorizado.
+- **Chave do operador** (`operator.key`) — arquivo aleatório de 256 bits que representa
+  *quem clona*; guarde offline (USB/cofre). Sem ele, o cofre não abre.
+- **Impressão do aparelho** — `modelo | serial | android_id | build fingerprint`,
+  lida direto do device na coleta. Fica no cabeçalho em claro (proveniência e
+  recuperação após perda), mas está **fundida na chave**: um cofre não pode ser
+  "reapontado" para outro aparelho.
+
+> Verificado em teste: senha errada, chave de operador errada **ou** aparelho
+> errado (`-ExpectedFingerprint`) **não abrem** o cofre.
+
+---
+
+## Instalação
+
+```powershell
+# PowerShell 7+ (AES-GCM nativo), Python 3.9+, adb
+./install.ps1
+```
+
+Instala/verifica `wa-crypt-tools` (pip), checa `adb`/`platform-tools` e o runtime de cripto.
+
+## Uso
+
+```powershell
+# 1) gerar a chave do operador (uma vez) — guarde offline
+./vault/arca-vault.ps1 init -OperatorKey .\operator.key
+
+# 2) clonar o aparelho rootado para um cofre
+./collector/arca-pull.ps1 -Out backup.arca -OperatorKey .\operator.key    # -Media p/ incluir fotos/vídeos
+
+# 3) recuperação (após perda): abrir o cofre
+./vault/arca-vault.ps1 open -In backup.arca -Out restored.tar -OperatorKey .\operator.key
+
+# 4) WhatsApp: descriptografar e visualizar
+./collector/arca-wa-decrypt.ps1 -Key .\whatsapp\key -Crypt .\whatsapp\msgstore.db.crypt14 -Out .\msgstore.db
+python ./viewer/arca-export.py .\msgstore.db -o ./viewer/web/messages.json --contacts .\wa.db
+./viewer/arca-viewer.ps1        # abre http://localhost:8787
+
+# vídeo explicativo (animado) em MP4
+./viewer/make-video.ps1         # gera viewer/arca.mp4 (Playwright + ffmpeg)
+```
+
+> O explicador animado também roda direto no navegador em
+> [`docs/video.html`](docs/video.html) e está embutido no site.
+
+> O coletor exige **root** (Magisk). Veja **[ROOT_GUIDE.md](ROOT_GUIDE.md)** — inclui o
+> procedimento específico do **Moto G24**.
+
+---
+
+## Estrutura
+
+```
+arca/
+├─ vault/        Arca.Crypto.psm1  ·  arca-vault.ps1     (cofre: init/seal/open/info)
+├─ collector/    arca-collect.sh (on-device)  ·  arca-pull.ps1  ·  arca-wa-decrypt.ps1
+├─ viewer/       arca-export.py  ·  arca-viewer.ps1  ·  web/ (timeline do WhatsApp)
+├─ docs/         site do GitHub Pages (explicativo)
+├─ install.ps1   ROOT_GUIDE.md   VIDEO_SCRIPT.md   LICENSE   AUTHORS
+```
+
+## Aviso legal
+
+Ferramenta de **backup e recuperação do próprio aparelho**, com consentimento.
+Extrair dados de dispositivos de terceiros é ilegal na maioria das jurisdições.
+Rootear o aparelho pode anular a garantia e apagar os dados — leia o `ROOT_GUIDE.md`.
+
+---
+
+© 2026 Joaquim Pedro de Morais Filho — `j360074@hotmail.com`. MIT.

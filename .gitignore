@@ -1,0 +1,18 @@
+# Arca - artefatos sensiveis e locais (NUNCA versionar)
+operator.key
+*.arca
+*.tar
+payload.tar
+restored.tar
+msgstore.db
+wa.db
+*.crypt1*
+key
+viewer/web/messages.json
+
+# temporarios
+*.log
+.DS_Store
+Thumbs.db
+__pycache__/
+*.pyc

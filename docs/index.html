@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arca — Cofre de Recuperação Android</title>
+<meta name="description" content="Clone o Android num cofre cifrado e recupere apps e WhatsApp em caso de perda. Autor: Joaquim Pedro de Morais Filho.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="hero">
+  <nav class="nav">
+    <div class="brand"><span class="logo">⛨</span> Arca</div>
+    <div class="links">
+      <a href="#como">Como funciona</a>
+      <a href="#seguranca">Segurança</a>
+      <a href="#uso">Uso</a>
+      <a href="#video">Vídeo</a>
+      <a class="gh" href="https://github.com/elevbit-ai/arca">GitHub</a>
+    </div>
+  </nav>
+  <div class="hero-body">
+    <h1>Cofre de Recuperação Android</h1>
+    <p class="tagline">Clone o seu Android num <strong>cofre cifrado</strong> e recupere
+      <strong>apps, dados e o WhatsApp</strong> em caso de perda — protegido por uma senha
+      que <em>converge quem clona e o aparelho</em>.</p>
+    <div class="cta">
+      <a class="btn primary" href="https://github.com/elevbit-ai/arca">Ver no GitHub</a>
+      <a class="btn" href="#uso">Começar</a>
+    </div>
+    <p class="author">Autor: <strong>Joaquim Pedro de Morais Filho</strong> · j360074@hotmail.com · MIT</p>
+  </div>
+</header>
+
+<main>
+<section id="como" class="section">
+  <h2>Como funciona</h2>
+  <div class="steps">
+    <div class="card"><span class="n">1</span><h3>Root (oficial)</h3>
+      <p>No seu aparelho, destrave o bootloader e injete o Magisk. Caminho oficial — <strong>nunca exploit</strong>.</p></div>
+    <div class="card"><span class="n">2</span><h3>Clonagem</h3>
+      <p>O coletor empacota APKs, <code>/data/data</code>, mídia e o WhatsApp num único payload.</p></div>
+    <div class="card"><span class="n">3</span><h3>Cofre cifrado</h3>
+      <p>Tudo é selado em AES-256-GCM, com a chave derivada da senha + chave do operador + impressão do aparelho.</p></div>
+    <div class="card"><span class="n">4</span><h3>Recuperação</h3>
+      <p>No PC, abra o cofre, descriptografe o WhatsApp e navegue a timeline das conversas.</p></div>
+  </div>
+</section>
+
+<section id="seguranca" class="section alt">
+  <h2>O binding — a senha que converge</h2>
+  <p class="lead">A chave do cofre só existe quando três fatores se encontram.</p>
+  <div class="diagram">
+    <div class="factor"><div class="icon">🔑</div><h4>Senha</h4><p>algo que você <b>sabe</b></p></div>
+    <div class="op">+</div>
+    <div class="factor"><div class="icon">💾</div><h4>Chave do operador</h4><p><code>operator.key</code> — <b>quem clona</b></p></div>
+    <div class="op">+</div>
+    <div class="factor"><div class="icon">📱</div><h4>Impressão do aparelho</h4><p>modelo · serial · android_id · build</p></div>
+    <div class="op">=</div>
+    <div class="factor result"><div class="icon">⛨</div><h4>Chave AES-256</h4><p>abre o cofre</p></div>
+  </div>
+  <pre class="code"><code>Kp     = PBKDF2-SHA256(senha, salt, 600000)
+B      = HMAC-SHA256(chave_operador, impressão_do_aparelho)
+master = HMAC-SHA256(Kp, B)
+cofre  = AES-256-GCM(payload, master)   // em blocos, autenticado</code></pre>
+  <p class="note">Verificado em teste: senha errada, chave de operador errada <b>ou</b>
+     aparelho errado <b>não abrem</b> o cofre. A cifragem em blocos suporta backups grandes
+     sem estourar a memória e autentica a ordem dos dados.</p>
+</section>
+
+<section id="uso" class="section">
+  <h2>Uso</h2>
+  <pre class="code"><code># 1) instalar dependências
+./install.ps1
+
+# 2) gerar a chave do operador (guarde offline)
+./vault/arca-vault.ps1 init -OperatorKey .\operator.key
+
+# 3) clonar o aparelho rootado
+./collector/arca-pull.ps1 -Out backup.arca -OperatorKey .\operator.key
+
+# 4) recuperar
+./vault/arca-vault.ps1 open -In backup.arca -Out restored.tar -OperatorKey .\operator.key
+
+# 5) WhatsApp
+./collector/arca-wa-decrypt.ps1 -Key .\whatsapp\key -Crypt .\whatsapp\msgstore.db.crypt14 -Out .\msgstore.db
+python ./viewer/arca-export.py .\msgstore.db -o ./viewer/web/messages.json --contacts .\wa.db
+./viewer/arca-viewer.ps1</code></pre>
+  <p>Root exige o caminho oficial (Magisk). O repositório traz o
+     <a href="https://github.com/elevbit-ai/arca/blob/main/ROOT_GUIDE.md">ROOT_GUIDE.md</a>,
+     com a seção específica do <strong>Moto G24</strong>.</p>
+</section>
+
+<section id="video" class="section alt">
+  <h2>Vídeo demonstrativo</h2>
+  <p class="lead">Explicador animado — toca no navegador, sem plugin. Para um screencast do
+     app rodando no seu aparelho, use o roteiro de
+     <a href="https://github.com/elevbit-ai/arca/blob/main/VIDEO_SCRIPT.md">VIDEO_SCRIPT.md</a>.</p>
+  <div class="video-frame">
+    <iframe src="video.html" title="Arca — vídeo explicativo animado" loading="lazy"
+            allow="fullscreen" style="width:100%;aspect-ratio:16/9;border:1px solid var(--line);border-radius:14px"></iframe>
+    <p style="text-align:center;margin-top:12px">
+      <a class="btn primary" href="video.html">Abrir em tela cheia</a>
+    </p>
+  </div>
+</section>
+
+<section id="limites" class="section">
+  <h2>Limites honestos</h2>
+  <ul class="honest">
+    <li>Recuperação = <b>arquivo legível</b> + reinstalação de APKs. Rodar todo app num emulador é <i>best-effort</i> (Play Integrity/attestation bloqueiam).</li>
+    <li>WhatsApp: lê o histórico; <b>não</b> contorna a verificação por número para "mudar de aparelho".</li>
+    <li>Precisa de <b>root</b>. Aparelhos de operadora muitas vezes <b>não</b> destravam.</li>
+    <li>Ferramenta para o <b>seu próprio</b> aparelho, com consentimento.</li>
+  </ul>
+</section>
+</main>
+
+<footer class="foot">
+  <p>Arca — Cofre de Recuperação Android · © 2026 <strong>Joaquim Pedro de Morais Filho</strong> · j360074@hotmail.com · Licença MIT</p>
+  <p><a href="https://github.com/elevbit-ai/arca">github.com/elevbit-ai/arca</a></p>
+</footer>
+
+</body>
+</html>

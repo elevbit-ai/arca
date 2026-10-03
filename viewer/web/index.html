@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arca — Visualizador</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="logo">⛨</span> Arca <small>Visualizador de Recuperação</small></div>
+  <div class="stats" id="stats">carregando…</div>
+</header>
+<main class="layout">
+  <aside class="sidebar">
+    <input type="search" id="filter" placeholder="Filtrar conversas…" autocomplete="off">
+    <ul id="chatlist" class="chatlist"></ul>
+  </aside>
+  <section class="conversation">
+    <div id="convhead" class="convhead">Selecione uma conversa</div>
+    <div id="messages" class="messages"></div>
+  </section>
+</main>
+<footer class="foot">
+  Arca — Cofre de Recuperação Android · Autor: Joaquim Pedro de Morais Filho &lt;j360074@hotmail.com&gt;
+</footer>
+<script src="app.js"></script>
+</body>
+</html>
