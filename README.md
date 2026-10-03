@@ -141,11 +141,12 @@ arca/
 
 ## Vídeo explicativo
 
-Um explicador animado e narrado (com legendas) roda direto no navegador, sem plugin:
+Um explicador animado e narrado (com legendas), em **10 cenas**, do problema ao cofre aberto:
 
-- **No ar:** <https://elevbit-ai.github.io/arca/video.html>
-- **Local:** abra [`docs/video.html`](docs/video.html)
-- **Screencast do app real:** siga o roteiro cena a cena em [`VIDEO_SCRIPT.md`](VIDEO_SCRIPT.md) e gere um MP4 com `./viewer/make-video.ps1`.
+- **MP4 (no ar):** <https://elevbit-ai.github.io/arca/arca.mp4> — embutido no [site](https://elevbit-ai.github.io/arca/#video).
+- **Versão interativa (navegador):** <https://elevbit-ai.github.io/arca/video.html> ou [`docs/video.html`](docs/video.html).
+- **Regenerar o MP4:** `./viewer/make-video.ps1` (Playwright + ffmpeg) captura as 10 cenas em H.264.
+- **Screencast do app real:** siga o roteiro cena a cena em [`VIDEO_SCRIPT.md`](VIDEO_SCRIPT.md).
 
 ---
 

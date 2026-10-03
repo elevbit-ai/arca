@@ -193,14 +193,19 @@ python ./viewer/arca-export.py .\msgstore.db -o ./viewer/web/messages.json --con
 <section id="video" class="section">
   <div class="eyebrow">demonstração</div>
   <h2>Vídeo explicativo</h2>
-  <p class="lead">Explicador animado narrado, com legendas — toca no navegador, sem plugin.
-     Para um screencast do app rodando no aparelho, use o roteiro de
+  <p class="lead">Explicador animado e narrado, com legendas, em 10 cenas — do problema ao
+     cofre aberto. Para um screencast do app rodando no aparelho, use o roteiro de
      <a href="https://github.com/elevbit-ai/arca/blob/main/VIDEO_SCRIPT.md" rel="noopener">VIDEO_SCRIPT.md</a>.</p>
   <div class="video-frame">
-    <iframe src="video.html" title="Arca — vídeo explicativo animado" loading="lazy"
-            allow="fullscreen"></iframe>
+    <video controls playsinline preload="metadata" poster="arca-poster.jpg"
+           title="Arca — vídeo explicativo">
+      <source src="arca.mp4" type="video/mp4">
+      Seu navegador não reproduz vídeo HTML5. Baixe o
+      <a href="arca.mp4">arca.mp4</a> ou veja a <a href="video.html">versão interativa</a>.
+    </video>
     <p class="video-actions">
-      <a class="btn primary" href="video.html">Abrir em tela cheia ↗</a>
+      <a class="btn primary" href="arca.mp4" download>Baixar MP4 ↓</a>
+      <a class="btn ghost" href="video.html">Abrir versão interativa ↗</a>
     </p>
   </div>
 </section>

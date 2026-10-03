@@ -6,7 +6,8 @@ Autor:   Joaquim Pedro de Morais Filho <j360074@hotmail.com>
 Licenca: MIT
 
 Usa Playwright (Chromium headless) para abrir o video.html e gravar uma passada
-completa das 8 cenas; depois converte para MP4 com ffmpeg (H.264, compativel).
+completa das 10 cenas; depois converte para MP4 com ffmpeg (H.264, compativel).
+Durante a captura, os controles do player sao ocultados para o MP4 ficar limpo.
 
 Pre-requisitos:
   pip install playwright
@@ -21,8 +22,8 @@ import argparse, os, pathlib, shutil, subprocess, sys
 
 HERE = pathlib.Path(__file__).resolve().parent
 VIDEO_HTML = (HERE / ".." / "docs" / "video.html").resolve()
-# soma das data-dur das cenas = 70.5s; 70s encerra na cena de fechamento
-DEFAULT_SECONDS = 70
+# soma das data-dur das 10 cenas = 96s; 95s encerra na cena de fechamento (assinatura)
+DEFAULT_SECONDS = 95
 
 
 def main():
@@ -56,6 +57,10 @@ def main():
         )
         page = context.new_page()
         page.goto(VIDEO_HTML.as_uri())
+        # captura limpa: esconde a barra de controles e a dica de teclado,
+        # deixando o cabecalho da marca e o palco animado centralizados no quadro.
+        page.add_style_tag(content=".controls,.hint{display:none!important}")
+        page.wait_for_timeout(600)  # deixa a cena de abertura assentar
         page.wait_for_timeout(args.seconds * 1000)
         context.close()   # flush do video
         browser.close()
